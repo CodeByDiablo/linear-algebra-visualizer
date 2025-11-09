@@ -171,7 +171,3 @@ MIT License — Free to use for learning, research, or development.
 
 💙 *Created with passion by* **Devesh Panwar**
 *Student, Chandigarh University*
-
-```
-
----
