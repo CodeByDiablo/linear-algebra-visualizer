@@ -1,68 +1,76 @@
-# 🎯 Linear Algebra Visualizer (2D & 3D with WebAssembly)
+---
 
-An interactive tool to visualize how matrices transform vectors and basis in **2D and 3D space** — powered by **C++, WebAssembly (WASM), JavaScript, HTML, CSS, and Three.js**.
+### ✅ **📌 COPY FROM BELOW (Start to End) AND PASTE INTO README.md**
+
+```markdown
+# 🎯 Linear Algebra Visualizer  
+### *(2D & 3D Matrix Transformations using C++ + WebAssembly + Three.js)*
+
+An interactive tool to visualize how **matrices transform vectors and coordinate systems** in both **2D and 3D space**, using:
+
+- ✅ **C++ (compiled to WebAssembly) for fast math**
+- ✅ **JavaScript (Canvas + Three.js) for visualization**
+- ✅ **HTML5 + CSS3 for UI**
 
 ---
 
-## 👨‍💻 **Author**
+## 👨‍💻 Author
+
 **Devesh Panwar**  
 Student, Chandigarh University
 
 ---
 
-## 🚀 **Features**
+## 🚀 Features
 
-✔ Visualize matrix multiplication in **2D & 3D**  
-✔ Live transformation of vectors using **C++ compiled to WebAssembly**  
-✔ 3D visualization using **Three.js (WebGL)**  
-✔ Interactive camera controls (rotate, zoom, pan)  
-✔ Reset to Identity Matrix anytime  
-✔ Built for learning & presentation — clean UI
+✔ Visualizes 2D and 3D matrix transformations  
+✔ Uses C++ → WebAssembly for high-performance computation  
+✔ 3D Mode with orbit camera using Three.js  
+✔ Input any matrix & vector to see transformation instantly  
+✔ Reset to Identity Matrix easily  
+✔ Clean + modern UI (glassmorphism styling)
 
 ---
 
-## 🧠 **Mathematics Behind This**
+## 🧠 Understanding the Math
 
 ### ✅ 2D Matrix Transformation
-A 2×2 matrix transforms a 2D vector:
+
+A 2×2 matrix multiplies a 2D vector like this:
 
 \[
-A = 
+A =
 \begin{bmatrix}
 a & b \\
 c & d
-\end{bmatrix},
-\quad
-v = 
+\end{bmatrix},\quad
+v =
 \begin{bmatrix}
 x \\
 y
 \end{bmatrix}
 \Rightarrow
-A \cdot v = 
+A \cdot v =
 \begin{bmatrix}
 ax + by \\
 cx + dy
 \end{bmatrix}
 \]
 
-This changes:
-- Size of the vector (scaling)
-- Direction of the vector (rotation)
-- Shape of grid (shear/reflection)
+📌 This changes direction, scale, orientation, or shears the vector.
 
+---
 
 ### ✅ 3D Matrix Transformation
 
 \[
-A = 
+A =
 \begin{bmatrix}
 a & b & c \\
 d & e & f \\
 g & h & i
-\end{bmatrix},
-\quad
-v = 
+\end{bmatrix},\quad
+v =
 \begin{bmatrix}
 x \\
 y \\
@@ -77,83 +85,98 @@ gx + hy + iz
 \end{bmatrix}
 \]
 
-This affects:
-- Rotation in 3D spaces  
-- Perspective changes  
-- Shear, scaling, reflections  
-
-All matrix computations are **executed in C++ → compiled to WebAssembly** for high performance.
+📌 Used for 3D **rotation, scaling, shearing, and perspective changes**
 
 ---
 
-## 🗂️ **Folder Structure**
+## 📁 Folder Structure
+
+```
 
 linear-algebra-visualizer/
-├─ public/
-│ ├─ home.html # Mode Selection Page (2D or 3D)
-│ ├─ index.html # 2D Visualizer
-│ ├─ index-3d.html # 3D Visualizer
-│ ├─ style.css # Styling
-│ ├─ app.js # 2D Logic (Canvas + WASM)
-│ ├─ app3d.js # 3D Logic (Three.js + WASM)
-│ └─ wasm/
-│ ├─ linAlg.js/linAlg.wasm # 2D WebAssembly
-│ ├─ linAlg3d.js/linAlg3d.wasm # 3D WebAssembly (optional)
-└─ src/
-├─ linAlg.cpp # 2D C++ Code
-└─ linAlg3d.cpp # 3D C++ Code
+├── public/
+│   ├── home.html          # Mode selection (2D or 3D)
+│   ├── index.html         # 2D Visualizer
+│   ├── index-3d.html      # 3D Visualizer
+│   ├── style.css          # Styling
+│   ├── app.js             # 2D JavaScript & WASM interface
+│   ├── app3d.js           # 3D JavaScript & WASM + Three.js
+│   └── wasm/
+│       ├── linAlg.js      # 2D WebAssembly loader
+│       ├── linAlg.wasm    # 2D compiled WebAssembly
+│       ├── linAlg3d.js    # 3D WebAssembly loader
+│       └── linAlg3d.wasm  # 3D compiled WebAssembly
+└── src/
+├── linAlg.cpp         # C++ logic for 2D matrix ops
+└── linAlg3d.cpp       # C++ logic for 3D matrix ops
+
+````
 
 ---
 
-## ⚙️ **How to Run the Project Locally**
+## ⚙️ How to Run Locally
 
-### ✅ Step 1 — Start Live Server
+### ✅ 1. Open in Live Server (VS Code)
+- Right-click `public/home.html` → **“Open with Live Server”**
 
-Open project in VS Code → Right-click `public/home.html` →  
-✅ **"Open with Live Server"**
+---
 
-### ✅ Step 2 — Compile WebAssembly (if not already done)
+### ✅ 2. Compile C++ to WebAssembly (Only if rebuilding)
 
-In PowerShell (project root):
+**2D Compilation:**
 
-**For 2D:**
 ```powershell
 emcc src/linAlg.cpp -O3 -s WASM=1 `
   -s EXPORTED_FUNCTIONS='["_multiply2x2","_transformBasis","_malloc","_free"]' `
   -s EXPORTED_RUNTIME_METHODS='["cwrap","HEAPF64"]' `
   -o public/wasm/linAlg.js
+````
 
-**For 3D:**
+**3D Compilation:**
+
 ```powershell
 emcc src/linAlg3d.cpp -O3 -s WASM=1 `
   -s EXPORTED_FUNCTIONS='["_multiply3x3","_malloc","_free"]' `
   -s EXPORTED_RUNTIME_METHODS='["cwrap","HEAPF64"]' `
   -o public/wasm/linAlg3d.js
+```
 
-technologies_used:
-  - name: "C++"
-    purpose: "Performs core matrix operations and vector transformations."
-  
-  - name: "WebAssembly (WASM)"
-    purpose: "Runs compiled C++ code in the browser for high performance."
-  
-  - name: "JavaScript (ES6 Modules)"
-    purpose: "Handles UI logic, communicates with WASM, draws on canvas."
+---
 
-  - name: "HTML5"
-    purpose: "Builds the structure of the UI and canvas elements."
-  
-  - name: "CSS3"
-    purpose: "Styles the UI and provides responsive, dark-themed layout."
+## 🛠️ Technologies Used
 
-  - name: "Canvas API (2D)"
-    purpose: "Visualizes 2D vectors, axes, and matrix transformations."
+| Technology                | Purpose                                               |
+| ------------------------- | ----------------------------------------------------- |
+| **C++**                   | Matrix math and vector transformations                |
+| **WebAssembly (WASM)**    | Runs C++ code inside the browser at near-native speed |
+| **JavaScript (ES6)**      | UI logic and WASM interaction                         |
+| **HTML5 / CSS3**          | Layout and styling                                    |
+| **Canvas API (2D)**       | Drawing vectors & axes                                |
+| **Three.js (WebGL)**      | 3D scene, camera control, arrows                      |
+| **Emscripten**            | Compiles C++ → WebAssembly                            |
+| **VS Code + Live Server** | Local development and testing                         |
 
-  - name: "Three.js (WebGL)"
-    purpose: "Renders 3D coordinate systems, vectors, and transformations."
+---
 
-  - name: "Emscripten"
-    purpose: "Compiles C++ to WebAssembly and generates JavaScript bindings."
+## 🚧 Future Improvements
 
-  - name: "VS Code + Live Server"
-    purpose: "Local development environment and live reloading for testing."
+* 🎛 Add preset matrices (rotation, reflection, shear buttons)
+* 🎥 Animate vector transformations
+* 📸 Export canvas as PNG/SVG
+* 📐 Show determinant, eigenvalues, and basis deformation
+* 🌐 Deploy using GitHub Pages / Vercel
+
+---
+
+## 📄 License
+
+MIT License — Free to use for learning, research, or development.
+
+---
+
+💙 *Created with passion by* **Devesh Panwar**
+*Student, Chandigarh University*
+
+```
+
+---
