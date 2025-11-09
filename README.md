@@ -1,8 +1,3 @@
----
-
-### ✅ **📌 COPY FROM BELOW (Start to End) AND PASTE INTO README.md**
-
-```markdown
 # 🎯 Linear Algebra Visualizer  
 ### *(2D & 3D Matrix Transformations using C++ + WebAssembly + Three.js)*
 
